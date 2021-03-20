@@ -100,10 +100,6 @@ export default {
                   ],
                 }
               ]
-            },{ 
-              name: "EDITDA", 
-              value: {amount: "123", color: "green"}, 
-              delta: {amount:"12%", color: "green"}, 
             },
             {
               name: "NON-CAC related",
