@@ -1,5 +1,40 @@
 <template>
-    
+    <div class="tree-container" ref="container">
+    <svg class="svg vue-tree" ref="svg" :style="initialTransformStyle"></svg>
+
+    <div
+      class="dom-container"
+      ref="domContainer"
+      :style="initialTransformStyle"
+    >
+      <transition-group name="tree-node-item" tag="div">
+        <div
+          class="node-slot"
+          v-for="(node, index) of nodeDataList"
+          :key="node.data._key"
+          :style="{
+            left: formatDimension(
+              direction === DIRECTION.VERTICAL ? node.x : node.y
+            ),
+            top: formatDimension(
+              direction === DIRECTION.VERTICAL ? node.y : node.x
+            ),
+            width: formatDimension(config.nodeWidth),
+            height: formatDimension(config.nodeHeight)
+          }"
+        >
+          <slot
+            name="node"
+            v-bind:node="node.data"
+            v-bind:collapsed="node.data._collapsed"
+            v-bind:index="index"
+          >
+            <span>{{ node.data.value }}</span>
+          </slot>
+        </div>
+      </transition-group>
+    </div>
+  </div>
 </template>
 
 <script>

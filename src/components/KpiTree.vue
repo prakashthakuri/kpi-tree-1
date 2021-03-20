@@ -5,9 +5,9 @@
     <div class="tree-container" ref="container">
       <vue-tree 
         ref="tree"
-          :style = "{width: treeW + 'px', height: treeH + 'px'}"
+          :style="{width: treeW + 'px', height: treeH + 'px'}"
           :dataset = "tree"
-          :config= 'treeConfig'
+          :config= "treeConfig"
           linkStyle = "straight">
 
           <template v-slot:node="{ node, collapsed, index }">
@@ -47,6 +47,8 @@
 <script>
 
  import VueTree from './VueTree'
+
+
 export default {
   name: 'KpiTree',
   props: {
@@ -141,7 +143,10 @@ export default {
     resizeHandler () {
       this.treeW = this.$refs.container.clientWidth
       this.treeH = this.$refs.container.clientHeight
+
+      this.$refs.tree.setTransform(this.treeW, this.treeH)
     },
+    
     onClickNode (index) {
       this.$refs.tree.onClickNode(index)
     },
